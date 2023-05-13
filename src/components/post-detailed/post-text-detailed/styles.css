@@ -1,0 +1,5 @@
+.allTextInfo {
+    -webkit-line-clamp: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
