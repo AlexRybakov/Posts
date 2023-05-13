@@ -4,7 +4,7 @@ import { Title } from '../title/title';
 import Post from '../post/post';
 const { Content } = Layout;
 
-export function LayoutApp ({posts,  currentUser, onDelete, onPostLike})  {
+export function LayoutApp({ posts, currentUser, onDelete, onPostLike }) {
 
 
 
@@ -15,36 +15,36 @@ export function LayoutApp ({posts,  currentUser, onDelete, onPostLike})  {
 
   return (
     <Layout>
-      <Title/>
+      <Title />
       <Content
         className="site-layout"
         style={{
           padding: '0 50px',
         }}
       >
-  <Breadcrumb
-    items={[
-      {
-        title: <a href="">Home</a>,
-      },
-      {
-        title: 'List',
-      }
-    ]}
-  />
-  <List
-  style={{
-    padding: 24,
-    minHeight: 380,
-    background: colorBgContainer,
-  }}
->
-  <PostList posts={posts} onPostLike={onPostLike} currentUser={currentUser} onDelete={onDelete}/>
-</List>
+        <Breadcrumb
+          items={[
+            {
+              title: <a href="">Home</a>,
+            },
+            {
+              title: 'List',
+            }
+          ]}
+        />
+        <List
+          style={{
+            padding: 24,
+            minHeight: 380,
+            background: colorBgContainer,
+          }}
+        >
+          <PostList posts={posts} onPostLike={onPostLike} currentUser={currentUser} onDelete={onDelete} />
+        </List>
       </Content>
     </Layout>
   );
-  
+
 };
 
 

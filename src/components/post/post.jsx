@@ -15,80 +15,80 @@ import { isLiked } from "../../utils/post";
 dayjs.extend(relativeTime)
 
 export const Post = ({
-    
-    image,
-    title,
-    text,
-    created_at,
-    author,
-    onPostLike,
-    onDelete,
-    _id,
-    likes,
-    currentUser,
-    comments,
-    tags
-    }) => {
+
+  image,
+  title,
+  text,
+  created_at,
+  author,
+  onPostLike,
+  onDelete,
+  _id,
+  likes,
+  currentUser,
+  comments,
+  tags
+}) => {
 
 
-    const like = isLiked(likes, currentUser?._id);
-    const canDelete = currentUser?._id === author._id;
+  const like = isLiked(likes, currentUser?._id);
+  const canDelete = currentUser?._id === author._id;
 
-    function handleClickButtonLike() {
-        onPostLike({ likes, _id });
-    }
+  function handleClickButtonLike() {
+    onPostLike({ likes, _id });
+  }
 
-    function handleClickDelete() {
-      onDelete({ _id });
-    }
+  function handleClickDelete() {
+    onDelete({ _id });
+  }
 
-      const IconText = ({ icon, text }) => (
-        <Space>
-          {React.createElement(icon)}
-          {text}
-        </Space>
-      );
+  const IconText = ({ icon, text }) => (
+    <Space>
+      {React.createElement(icon)}
+      {text}
+    </Space>
+  );
 
-        return (
+  return (
     <Card className='card'
-    title={[
-      <Meta avatar={<Avatar src={author?.avatar} />} title={author?.name}/>
-    ]}
-    style={{
-      width: 300,
-      margin: 15
-    }}
-    extra={[
-      canDelete && (
-        <Button  danger onClick={handleClickDelete}>
-        <DeleteTwoTone twoToneColor="red"/>
-        </Button> )
-    ]}
-    cover={
-      <img
-        alt="Изображение"
-        src={image}
-      />
-    }
-    actions={[
-      <Button onClick={handleClickButtonLike}>
-      <IconText icon={HeartOutlined} text={likes.length}/>
-      </Button>,
+      title={[
+        <Meta avatar={<Avatar src={author?.avatar} />} title={author?.name} />
+      ]}
+      style={{
+        width: 300,
+        margin: 15
+      }}
+      extra={[
+        canDelete && (
+          <Button danger onClick={handleClickDelete}>
+            <DeleteTwoTone twoToneColor="red" />
+          </Button>)
+      ]}
+      cover={
+        <img
+          alt="Изображение"
+          src={image}
+        />
+      }
+      actions={[
+        <Button onClick={handleClickButtonLike}>
+          <IconText icon={HeartOutlined} text={likes.length} />
+        </Button>,
+        <Link to={`postpage/${_id}`}>
+          <IconText icon={MessageOutlined} text={comments.length} />
+        </Link>,
+        <IconText icon={CalendarTwoTone} text={dayjs(created_at).fromNow()} />,
+      ]}
+    >
       <Link to={`postpage/${_id}`}>
-        <IconText icon={MessageOutlined} text={comments.length}/>
-      </Link>,
-      <IconText icon={CalendarTwoTone} text={dayjs(created_at).fromNow()}/>,
-    ]}
-  >
-    <Link to={`postpage/${_id}`}>
-    <Meta
-      title={title}
-      description={text}
-    />
-    </Link>
+        <Meta
+          title={title}
+          description={text}
+        />
+      </Link>
     </Card>
-        )
-        }
+  )
+}
 export default Post;
 
 
