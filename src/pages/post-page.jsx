@@ -19,9 +19,9 @@ function PostPage() {
 
     useEffect(() => {
         api.getInfoPost(postID)
-            .then(([postData, userData]) => {
+            .then(([postData, currentUserData]) => {
                 setPost(postData);
-                setCurrentUser(userData)
+                setCurrentUser(currentUserData)
             })
 
     }, [postID])

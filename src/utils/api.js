@@ -57,7 +57,7 @@ class Api {
     }
 
     getPaginate(page) {
-        return fetch(`${this.#baseUrl}/posts/paginate?page=${page}&limit=10`, {
+        return fetch(`${this.#baseUrl}/posts/paginate?page=${page}&limit=14`, {
           headers: this.#headers,
         }).then(this.#onResponse);
       }
@@ -65,6 +65,69 @@ class Api {
     getPaginateInfo(page) {
         return Promise.all([this.getPaginate(page), this.getUserInfo()]);
       }
+
+    changeUserNameAndAbout (data) {
+        return fetch(`${this.#baseUrl}/users/me`, {
+            method: 'PATCH',
+            headers: this.#headers,
+            body: JSON.stringify(data)
+        })
+            .then(this.#onResponse)
+    }
+
+    changeUserAvatar (data) {
+        return fetch(`${this.#baseUrl}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this.#headers,
+            body: JSON.stringify(data)
+        })
+            .then(this.#onResponse)
+    }
+
+    createNewPost (data) {
+        return fetch(`${this.#baseUrl}/posts`, {
+            method: 'POST',
+            headers: this.#headers,
+            body: JSON.stringify(data)
+        })
+            .then(this.#onResponse)
+    }
+
+    changePost (idPost, data) {
+        return fetch(`${this.#baseUrl}/posts/${idPost}`, {
+            method: 'PATCH',
+            headers: this.#headers,
+            body: JSON.stringify(data)
+        })
+            .then(this.#onResponse)
+    }
+
+    createNewComment (idPost, data) {
+        return fetch(`${this.#baseUrl}/posts/comments/${idPost}`, {
+            method: 'POST',
+            headers: this.#headers,
+            body: JSON.stringify(data)
+        })
+            .then(this.#onResponse)
+    }
+
+    deleteComment (idPost, idComments) {
+        return fetch(`${this.#baseUrl}/posts/comments/${idPost}/${idComments}`, {
+            method: 'DELETE',
+            headers: this.#headers
+        })
+            .then(this.#onResponse)
+    }
+
+    getCommentPostById(idPost) {
+        return fetch(`${this.#baseUrl}/posts/comments/${idPost}`, {
+            headers: this.#headers
+        })
+            .then(this.#onResponse)
+    }
+
+
+
 
 }
 

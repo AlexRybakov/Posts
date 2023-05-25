@@ -12,25 +12,15 @@ import { isLiked } from "../../utils/post";
 import { UserContext } from "../../context/current-user";
 import { Pagination, Space } from "antd";
 
-const PAGE_SIZE = 10;
 
 
 export function App() {
   const [posts, setPosts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-  const [favorites, setFavorites] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  const [refresh, setRefresh] = useState(true);
 
-  useEffect(() => {
-    api.getAllInfo()
-      .then(([dataPosts, dataUser]) => {
-        setPosts(dataPosts);
-        setCurrentUser(dataUser)
-      })
-      .catch(data => console.log(data))
-  }, [])
+
 
   useEffect(() => {
     api
@@ -49,14 +39,7 @@ export function App() {
       const newPosts = posts.map((cardState) => {
         return cardState._id === updateCard._id ? updateCard : cardState;
       });
-
       setPosts(newPosts);
-
-      if (!like) {
-        setFavorites(prevState => [...prevState, updateCard])
-      } else {
-        setFavorites(prevState => prevState.filter(card => card._id !== updateCard._id))
-      }
     });
   }
 
@@ -71,6 +54,7 @@ export function App() {
 
 
 
+
   return (
     <>
       <UserContext.Provider value={currentUser}>
@@ -78,7 +62,7 @@ export function App() {
         <Routes>
           <Route
             path="/postpage/:postID"
-            element={<PostPage onPostLike={handlePostLike} />}
+            element={<PostPage onPostLike={handlePostLike} currentUser={currentUser} />}
           />
           <Route
             path="/"

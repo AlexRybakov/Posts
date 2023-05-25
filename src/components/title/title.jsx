@@ -1,12 +1,21 @@
 import { Card } from 'antd';
-import { Button, Space } from 'antd';
+import { Button, Space, Form, Input } from 'antd';
+import { useState } from 'react';
+
+import s from "./styles.title.css"
+import { MyModal } from '../modal/modal';
+import { CreateForm } from '../form-create-post/form-create-post';
+
 
 
 
 export function Title() {
+
   function createNewPost() {
-    console.log("Есть контакт!");
+    console.log("Ест1111ь контакт!");
   }
+  const buttonTitle = "Создать пост";
+  
   return (
 
     <Card
@@ -14,7 +23,7 @@ export function Title() {
     >
       <h1>Добро пожаловать на мою страничку!</h1>
       <Space wrap>
-        <Button type="primary" onClick={() => createNewPost()}>Создать пост</Button>
+        <MyModal buttonTitle={buttonTitle} modalTitle={buttonTitle} form={<CreateForm />}></MyModal>
       </Space>
     </Card>
   );

@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from "antd";
+import { Button, Card, Image, Typography } from "antd";
 import { useNavigate } from "react-router";
 
 
