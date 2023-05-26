@@ -2,16 +2,18 @@ import React, { useState } from "react";
 
 import { Avatar, Button, Form, Input } from "antd";
 import api from "../../utils/api";
+import { PostContext } from "../../context/post-context";
 
 
 
-export function ChangeForm ({user}) {
+export function ChangeForm ({user, closeStatus}) {
 
-  const [open, setOpen] = useState(false);
   const textInput = React.createRef();
   const [output, setOutput] = useState(null);
   const inputNameAndAbout = {};
   const inputAvatar = {};
+  const createPost = React.useContext(PostContext);
+  const handleUpdatePost = createPost.handleUpdatePost;
 
 
   function showInput() {
@@ -25,12 +27,7 @@ export function ChangeForm ({user}) {
     inputAvatar.avatar = e.avatar;
     api.changeUserNameAndAbout(inputNameAndAbout);
     api.changeUserAvatar(inputAvatar);
-    setTimeout(() => {
-      setOpen(false);
-    }, 500);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    handleUpdatePost()
   }
 
     return (
@@ -72,7 +69,7 @@ export function ChangeForm ({user}) {
         <Input disabled />
       </Form.Item>
       <Form.Item>
-        <Button block type='primary' htmlType="submit">Изменить</Button>
+        <Button block type='primary' htmlType="submit" onClick={closeStatus}>Изменить</Button>
       </Form.Item>
     </Form>
     )

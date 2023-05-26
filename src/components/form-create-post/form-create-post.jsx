@@ -2,14 +2,14 @@ import React, { useState } from "react";
 
 import { Button, Form, Image, Input } from "antd";
 import api from "../../utils/api";
+import { PostContext } from "../../context/post-context";
 
 
 
-export function CreateForm() {
+export function CreateForm({closeStatus}) {
 
-
-  const [open, setOpen] = useState(false);
-  const [form] = Form.useForm();
+  const createPost = React.useContext(PostContext);
+  const handlerCreatePost = createPost.handleCreatePost;
   const textInput = React.createRef();
   const [output, setOutput] = useState(null);
   const defImg = "https://b-n-c.ru/local/templates/.default/img/no-img.jpg";
@@ -20,13 +20,8 @@ export function CreateForm() {
     inputData.title = e.title;
     inputData.text = e.text;
     api.createNewPost(inputData).then(
-    setTimeout(() => {
-      setOpen(false);
-    }, 500),
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000))
-    .catch((err) => alert('Ошибка на стороне сервера'))
+      handlerCreatePost()
+    );
   }
 
   function showInput() {
@@ -37,9 +32,8 @@ export function CreateForm() {
   return (
     <Form
       onFinish={onFinish}
-      form={form}
       method='onBlur'
-      autoComplete="off"
+      
     >
       <Form.Item
         name="image"
@@ -72,7 +66,7 @@ export function CreateForm() {
             message: "Введите заголовок поста"
           },
           {
-            type: 'text',
+            type: 'string',
             warningOnly: true,
           },
           {
@@ -91,7 +85,7 @@ export function CreateForm() {
             message: "Введите текст поста"
           },
           {
-            type: 'text',
+            type: 'string',
             warningOnly: true,
           },
           {
@@ -103,7 +97,7 @@ export function CreateForm() {
         <Input.TextArea allowClear={true} placeholder="Текст поста" />
       </Form.Item>
       <Form.Item>
-        <Button block type='primary' htmlType="submit">Создать</Button>
+        <Button block type='primary' htmlType="submit" onClick={closeStatus}>Создать</Button>
       </Form.Item>
     </Form>
   )

@@ -6,14 +6,12 @@ import { HeartOutlined, MessageOutlined, EditTwoTone, CalendarTwoTone, DeleteTwo
 import Meta from "antd/es/card/Meta";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import cn from "classnames";
 import s from "./styles.post.css"
 
 import { Link } from "react-router-dom";
 import { isLiked } from "../../utils/post";
 import { MyModal } from "../modal/modal";
 import { ChangePost } from "../form-change-post/form-change-profile/form-change-post";
-import Icon from "@ant-design/icons/lib/components/Icon";
 
 
 dayjs.extend(relativeTime)
@@ -37,6 +35,9 @@ export const Post = ({
   const canDelete = currentUser?._id === author._id;
   const canChange = currentUser?._id === author._id;
   const canChangeTitle = "Редактирование поста";
+  const [open, setOpen] = useState(false)
+  const openStatus = () => setOpen(true);
+  const closeStatus = () => setOpen(false)
 
   function handleClickButtonLike() {
     onPostLike({ likes, _id });
@@ -65,7 +66,7 @@ export const Post = ({
       }}
       extra={[
         canChange && (
-          <MyModal buttonTitle={<EditTwoTone twoToneColor="blue"/>} modalTitle={canChangeTitle} form={<ChangePost image={image} title={title} text={text} key={_id} _id={_id}/>}></MyModal>
+          <MyModal closeStatus={closeStatus} openStatus={openStatus} status={open} buttonTitle={<EditTwoTone twoToneColor="blue"/>} modalTitle={canChangeTitle} form={<ChangePost closeStatus={closeStatus} image={image} title={title} text={text} key={_id} _id={_id}/>}></MyModal>
         ),
         canDelete && (
           <Button danger style={{marginLeft: 10}} onClick={handleClickDelete} key={_id}>

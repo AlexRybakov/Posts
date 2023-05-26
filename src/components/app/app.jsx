@@ -11,6 +11,7 @@ import PostPage from "../../pages/post-page";
 import { isLiked } from "../../utils/post";
 import { UserContext } from "../../context/current-user";
 import { Pagination, Space } from "antd";
+import { PostContext } from "../../context/post-context";
 
 
 
@@ -19,14 +20,7 @@ export function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-
-  useEffect(() => {
-    api
-    .getUserInfo()
-    .then((userData) => {
-      setCurrentUser(userData)
-    })
-  },[])
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     api
@@ -36,7 +30,7 @@ export function App() {
         setPosts(postsData.posts);
         setPageCount(Math.ceil(postsData.total));
       })
-  }, [page]);
+  }, [page, refresh]);
 
   function handlePostLike(post) {
     const like = isLiked(post.likes, currentUser._id);
@@ -57,11 +51,19 @@ export function App() {
     });
   }
 
+  function handleCreatePost () {
+      page === 1 ? setRefresh((refresh) => !refresh) : setPage(1);
+  }
 
+  function handleUpdatePost () {
+    setRefresh((refresh) => !refresh)
+  }
+  
 
 
   return (
     <>
+    <PostContext.Provider value={{handleCreatePost: handleCreatePost, handleUpdatePost: handleUpdatePost, posts}}>
       <UserContext.Provider value={currentUser}>
         <AppHeader user={currentUser} />
         <Routes>
@@ -95,6 +97,7 @@ export function App() {
         </Routes>
         <AppFooter />
       </UserContext.Provider>
+      </PostContext.Provider>
     </>
   )
 }

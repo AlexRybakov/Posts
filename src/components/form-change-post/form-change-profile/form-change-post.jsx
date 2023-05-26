@@ -2,15 +2,18 @@ import React, { useState } from "react";
 
 import { Button, Form, Image, Input } from "antd";
 import api from "../../../utils/api";
+import { PostContext } from "../../../context/post-context";
 
 
 
-export function ChangePost ({ image, title, text, _id}) {
+export function ChangePost ({ image, title, text, _id, closeStatus}) {
 
-  const [open, setOpen] = useState(false);
+  const createPost = React.useContext(PostContext);
+  const handleUpdatePost = createPost.handleUpdatePost;
   const textInput = React.createRef();
   const [output, setOutput] = useState(null);
   const inputDataChange = {};
+
 
 
   function showInput() {
@@ -23,12 +26,8 @@ export function ChangePost ({ image, title, text, _id}) {
     inputDataChange.title = e.title;
     inputDataChange.text = e.text;
     api.changePost(_id, inputDataChange).then(
-    setTimeout(() => {
-      setOpen(false);
-    }, 500),
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000))
+      handleUpdatePost()
+    )
     .catch((err) => alert('Ошибка на стороне сервера'))
   }
 
@@ -62,7 +61,7 @@ export function ChangePost ({ image, title, text, _id}) {
         <Input.TextArea autoSize allowClear={true} placeholder="Текст поста"/>
       </Form.Item>
       <Form.Item>
-        <Button block type='primary' htmlType="submit">Изменить</Button>
+        <Button block type='primary' htmlType="submit" onClick={closeStatus}>Изменить</Button>
       </Form.Item>
     </Form>
     )

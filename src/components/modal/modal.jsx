@@ -1,25 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal } from "antd";
 
 
-export function MyModal ({buttonTitle, modalTitle, form}) {
+export function MyModal ({buttonTitle, modalTitle, form, buttonTitleSubmit, status, openStatus, closeStatus}) {
 
-    const [open, setOpen] = useState(false);
+      
 
-    return (
+      return (
         <>
         <Button 
-         type="primary" onClick={() => setOpen(true)}>{buttonTitle}</Button>
+         type="primary" onClick={openStatus}>{buttonTitle}</Button>
         <Modal
         title={modalTitle}
         centered
-        open={open}
-        onCancel={() => setOpen(false)}
+        open={status}
+        onCancel={closeStatus}
         width={600}
         footer={null}
-      >{form}</Modal>
+      >{form}
+      </Modal>
       </>
-    )
+    );
 }
 
 

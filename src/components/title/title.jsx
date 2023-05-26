@@ -1,10 +1,11 @@
 import { Card } from 'antd';
-import { Button, Space, Form, Input } from 'antd';
-import { useState } from 'react';
+import { Space} from 'antd';
+
 
 import s from "./styles.title.css"
 import { MyModal } from '../modal/modal';
 import { CreateForm } from '../form-create-post/form-create-post';
+import { useState } from 'react';
 
 
 
@@ -12,7 +13,9 @@ import { CreateForm } from '../form-create-post/form-create-post';
 export function Title() {
 
   const buttonTitle = "Создать пост";
-  
+  const [open, setOpen] = useState(false)
+  const openStatus = () => setOpen(true);
+  const closeStatus = () => setOpen(false);
   return (
 
     <Card
@@ -20,7 +23,7 @@ export function Title() {
     >
       <h1>Добро пожаловать на мою страничку!</h1>
       <Space wrap>
-        <MyModal buttonTitle={buttonTitle} modalTitle={buttonTitle} form={<CreateForm />}></MyModal>
+        <MyModal closeStatus={closeStatus} openStatus={openStatus} status={open} buttonTitle={buttonTitle} modalTitle={buttonTitle} form={<CreateForm closeStatus={closeStatus}/>}></MyModal>
       </Space>
     </Card>
   );

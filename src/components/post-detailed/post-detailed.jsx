@@ -8,7 +8,7 @@ import { Avatar, Button, Card, Col, Form, Input, List, Row, Space } from "antd";
 import Meta from "antd/es/card/Meta";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
-
+import s from "./styles.post-detailed.css"
 
 import { AllTextDetailedPost } from "./post-text-detailed/post-text-detailed";
 import api from "../../utils/api";
@@ -92,7 +92,7 @@ function PostDetailed({
   );
   return (
     <>
-      <Row>
+      <Row className="postPage">
         <Col>
           <Card
             style={{
