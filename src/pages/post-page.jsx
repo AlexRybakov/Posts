@@ -8,6 +8,7 @@ import PostDetailed from "../components/post-detailed/post-detailed";
 function PostPage() {
     const [post, setPost] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
+
     const { postID } = useParams();
 
     function handlePostLike(post) {
@@ -21,7 +22,7 @@ function PostPage() {
         api.getInfoPost(postID)
             .then(([postData, currentUserData]) => {
                 setPost(postData);
-                setCurrentUser(currentUserData)
+                setCurrentUser(currentUserData);
             })
 
     }, [postID])

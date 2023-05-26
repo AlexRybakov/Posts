@@ -11,9 +11,6 @@ import { CreateForm } from '../form-create-post/form-create-post';
 
 export function Title() {
 
-  function createNewPost() {
-    console.log("Ест1111ь контакт!");
-  }
   const buttonTitle = "Создать пост";
   
   return (

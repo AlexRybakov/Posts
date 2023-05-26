@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 
 
 import { HeartOutlined, MessageOutlined, CalendarOutlined, HeartTwoTone, DeleteFilled } from "@ant-design/icons";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { isLiked } from "../../utils/post";
 import { Avatar, Button, Card, Col, Form, Input, List, Row, Space } from "antd";
 import Meta from "antd/es/card/Meta";
@@ -26,23 +26,26 @@ function PostDetailed({
   likes,
   currentUser,
   user,
-  comments }) {
-  
+  comments, }) {
+
   const [comment, setComment] = useState([]);
+  const { postID } = useParams();
   const navigate = useNavigate();
   const like = isLiked(likes, user?._id);
-  const canDelete = currentUser?._id === comments?.author?._id;
+  const test = comment.map(function (item) {
+    return item.author._id
+  });
   const inputDataReview = {};
   const [form] = Form.useForm();
-  
+  let canDelete;
+
   useEffect(() => {
     api
-      .getCommentPostById(_id)
+      .getCommentPostById(postID)
       .then((commentsData) => {
         setComment(commentsData);
       })
-      .catch((err) => console.log(err));
-  }, [_id]);
+  }, [postID]);
 
 
   function handleClickButtonLike() {
@@ -57,7 +60,6 @@ function PostDetailed({
       });
       setComment(newComments);
     })
-    .catch((err) => alert('Нельзя удалить чужой комментарий!'))
   }
 
   function handleCreateComment (commentsUp) {
@@ -125,9 +127,10 @@ function PostDetailed({
           <List
             itemLayout="horizontal"
             dataSource={comment}
-            renderItem={(item) => (
+            renderItem={(item, index) => (
               <List.Item
-                actions={[
+                extra={[
+                  canDelete = test[index] === user?._id,
                   canDelete && (
                     <Button onClick={() => handleDeleteComments(_id, item._id)}>
                       <DeleteFilled />

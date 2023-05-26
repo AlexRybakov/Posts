@@ -9,6 +9,7 @@ export function CreateForm() {
 
 
   const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
   const textInput = React.createRef();
   const [output, setOutput] = useState(null);
   const defImg = "https://b-n-c.ru/local/templates/.default/img/no-img.jpg";
@@ -36,10 +37,27 @@ export function CreateForm() {
   return (
     <Form
       onFinish={onFinish}
+      form={form}
       method='onBlur'
+      autoComplete="off"
     >
       <Form.Item
         name="image"
+        rules={[
+          {
+            required: true,
+            message: "Введите URL изображения"
+          },
+          {
+            type: 'url',
+            warningOnly: true,
+            message: "Некорректный адрес изображения"
+          },
+          {
+            type: 'string',
+            min: 1,
+          },
+        ]}
       >
         <input className='inputAvatar' onChange={showInput} ref={textInput} placeholder="URL картинки поста" />
       </Form.Item>
@@ -48,11 +66,39 @@ export function CreateForm() {
       </Form.Item>
       <Form.Item
         name="title"
+        rules={[
+          {
+            required: true,
+            message: "Введите заголовок поста"
+          },
+          {
+            type: 'text',
+            warningOnly: true,
+          },
+          {
+            type: 'string',
+            min: 1,
+          },
+        ]}
       >
         <Input allowClear={true} placeholder="Заголовок поста" />
       </Form.Item>
       <Form.Item
         name="text"
+        rules={[
+          {
+            required: true,
+            message: "Введите текст поста"
+          },
+          {
+            type: 'text',
+            warningOnly: true,
+          },
+          {
+            type: 'string',
+            min: 1,
+          },
+        ]}
       >
         <Input.TextArea allowClear={true} placeholder="Текст поста" />
       </Form.Item>
@@ -62,3 +108,4 @@ export function CreateForm() {
     </Form>
   )
 }
+

@@ -20,7 +20,13 @@ export function App() {
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
 
-
+  useEffect(() => {
+    api
+    .getUserInfo()
+    .then((userData) => {
+      setCurrentUser(userData)
+    })
+  },[])
 
   useEffect(() => {
     api
@@ -30,7 +36,6 @@ export function App() {
         setPosts(postsData.posts);
         setPageCount(Math.ceil(postsData.total));
       })
-      .catch((err) => console.log(err));
   }, [page]);
 
   function handlePostLike(post) {
@@ -66,28 +71,28 @@ export function App() {
           />
           <Route
             path="/"
-            element={
+            element={[
               <LayoutApp
                 posts={posts}
                 onPostLike={handlePostLike}
                 currentUser={currentUser}
                 onDelete={handlePostDelete}
-              />
-            }
+              />,
+              <Space>
+              {pageCount &&
+                <Pagination
+                  total={pageCount}
+                  PageSize={page}
+                  defaultCurrent={page}
+                  onChange={(page) => setPage(page)}
+                  showSizeChanger={false}
+                />
+              }
+            </Space>
+            ]}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        <Space>
-          {!!pageCount &&
-            <Pagination
-              total={pageCount}
-              PageSize={page}
-              defaultCurrent={page}
-              onChange={(page) => setPage(page)}
-              showSizeChanger={false}
-            />
-          }
-        </Space>
         <AppFooter />
       </UserContext.Provider>
     </>
