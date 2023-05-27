@@ -16,7 +16,7 @@ export function LayoutApp({ posts, currentUser, onDelete, onPostLike }) {
         className="site-layout"
         style={{
           padding: '0 50px',
-          backgroundImage: 'URL(https://oir.mobi/uploads/posts/2021-01/1611839366_1-p-bogatii-sinii-fon-1.jpg)',
+          backgroundImage: 'URL(https://i.ibb.co/94C7GPf/1611839366-1-p-bogatii-sinii-fon-1-gigapixel-very-compressed-scale-4-00x.png)',
         }}
       >
         <Breadcrumb
@@ -33,7 +33,7 @@ export function LayoutApp({ posts, currentUser, onDelete, onPostLike }) {
           style={{
             padding: 24,
             minHeight: 380,
-            backgroundImage: 'URL(https://oir.mobi/uploads/posts/2021-01/1611839347_9-p-bogatii-sinii-fon-9.jpg)',
+            backgroundImage: 'URL(https://i.ibb.co/F7jy9Xz/1611839347-9-p-bogatii-sinii-fon-9-gigapixel-very-compressed-scale-4-00x.png)',
           }}
         >
           <PostList posts={posts} onPostLike={onPostLike} currentUser={currentUser} onDelete={onDelete} />

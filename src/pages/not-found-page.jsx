@@ -1,4 +1,4 @@
-import { Button, Card, Image, Typography } from "antd";
+import { Button, Card, Typography } from "antd";
 import { useNavigate } from "react-router";
 
 
@@ -6,10 +6,11 @@ export const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Card>
-        <Typography variant="h1" align="center">404</Typography>
-        <Typography variant="h1" align="center">УПС!</Typography>
-        <Typography variant="h1" align="center">Такой страницы не существует</Typography>
+      <Card
+        cover={
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/6b443b70759853.5bade2d0a6685.png"/>
+        }
+      >
       </Card>
       <Button variant="outlined" size="large" onClick={() => { navigate(-1) }}>
         Назад

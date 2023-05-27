@@ -157,7 +157,7 @@ function PostDetailed({
             <Input.TextArea allowClear={true} placeholder="Текст комментария" />
           </Form.Item>
           <Form.Item>
-          <Button block type='primary' htmlType="submit">Отправить комментарий</Button>
+          <Button block htmlType="submit">Отправить комментарий</Button>
           </Form.Item>
         </Form>
         </Col>
