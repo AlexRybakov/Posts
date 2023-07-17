@@ -1,0 +1,18 @@
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* .nowrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
+
+.ant-card-meta-description {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
