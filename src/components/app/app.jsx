@@ -72,7 +72,7 @@ export function App() {
             element={<PostPage onPostLike={handlePostLike} currentUser={currentUser} />}
           />
           <Route
-            path="/Posts"
+            path="/"
             element={[
               <LayoutApp
                 posts={posts}
