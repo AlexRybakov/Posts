@@ -22,7 +22,7 @@ export function LayoutApp({ posts, currentUser, onDelete, onPostLike }) {
         <Breadcrumb
           items={[
             {
-              title: <Button href="/" ><HomeTwoTone/>На главную</Button>,
+              title: <Button href="/Posts" ><HomeTwoTone/>На главную</Button>,
             },
             {
               title: 'List',

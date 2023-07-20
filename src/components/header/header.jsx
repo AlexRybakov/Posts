@@ -26,7 +26,7 @@ export function AppHeader({ children, user, data }) {
       }}
     >
       <MyModal closeStatus={closeStatus} openStatus={openStatus} status={open} buttonTitle={user?.name} modalTitle={modalTitle} form={<ChangeForm user={user} closeStatus={closeStatus}/>}></MyModal>
-      <Link to={'/'}>
+      <Link to={'/Posts'}>
       <div
         style={{
           float: 'right',
