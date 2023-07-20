@@ -5,7 +5,6 @@ import api from "../../utils/api";
 import { PostContext } from "../../context/post-context";
 
 
-
 export function CreateForm({closeStatus}) {
 
   const createPost = React.useContext(PostContext);
