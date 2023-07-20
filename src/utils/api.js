@@ -1,7 +1,7 @@
 class Api {
     #baseUrl;
     #headers;
-
+    
     constructor({baseUrl, headers}) {
         this.#baseUrl = baseUrl;
         this.#headers = headers;

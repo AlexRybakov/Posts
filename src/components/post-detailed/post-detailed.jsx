@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 import { HeartOutlined, MessageOutlined, CalendarOutlined, HeartTwoTone, DeleteFilled } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import { Avatar, Button, Card, Col, Form, Input, List, Row, Space } from "antd";
 import Meta from "antd/es/card/Meta";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
-import s from "./styles.post-detailed.css"
+import s from "./styles.post-detailed.css";
 
 import { AllTextDetailedPost } from "./post-text-detailed/post-text-detailed";
 import api from "../../utils/api";
@@ -52,7 +52,7 @@ function PostDetailed({
     onPostLike({ likes, _id });
   }
 
-  function handleDeleteComments (postId, commentsId) {
+  function handleDeleteComments(postId, commentsId) {
     api.deleteComment(postId, commentsId).then((updateComments) => {
       const newComments = updateComments.comments;
       newComments.map((comments) => {
@@ -62,12 +62,12 @@ function PostDetailed({
     })
   }
 
-  function handleCreateComment (commentsUp) {
-      const upComments = commentsUp.comments;
-      upComments.map((comments) => {
-        return comment !== comments;
-      });
-      setComment(upComments);
+  function handleCreateComment(commentsUp) {
+    const upComments = commentsUp.comments;
+    upComments.map((comments) => {
+      return comment !== comments;
+    });
+    setComment(upComments);
   }
 
   function onFinish(e) {
@@ -101,7 +101,6 @@ function PostDetailed({
             }}
             extra={[
               <Meta avatar={<Avatar src={author?.avatar} />} title={author?.name} />,
-              
             ]}
             cover={
               <img
@@ -111,10 +110,10 @@ function PostDetailed({
             }
             actions={[
               <Button onClick={handleClickButtonLike}>
-              <IconText icon={like ? <HeartTwoTone twoToneColor="#eb2f96"/> : <HeartOutlined />} text={likes?.length} key={_id}/>
-            </Button>,
-              <IconText icon={<MessageOutlined/>} text={comments?.length} />,
-              <IconText icon={<CalendarOutlined/>} text={dayjs(created_at).fromNow()} />,
+                <IconText icon={like ? <HeartTwoTone twoToneColor="#eb2f96" /> : <HeartOutlined />} text={likes?.length} key={_id} />
+              </Button>,
+              <IconText icon={<MessageOutlined />} text={comments?.length} />,
+              <IconText icon={<CalendarOutlined />} text={dayjs(created_at).fromNow()} />,
             ]}
           >
           </Card>
@@ -126,7 +125,7 @@ function PostDetailed({
           <h2>Комментарии: </h2>
           <List
             itemLayout="horizontal"
-            dataSource={comment}
+            dataSource={comment || 'No Comments'}
             renderItem={(item, index) => (
               <List.Item
                 extra={[
@@ -147,19 +146,19 @@ function PostDetailed({
             )}
           />
           <Form
-          form={form}
-          onFinish={onFinish}
-          method='onBlur'
-        >
-          <Form.Item
-            name="text"
+            form={form}
+            onFinish={onFinish}
+            method='onBlur'
           >
-            <Input.TextArea allowClear={true} placeholder="Текст комментария" />
-          </Form.Item>
-          <Form.Item>
-          <Button block htmlType="submit">Отправить комментарий</Button>
-          </Form.Item>
-        </Form>
+            <Form.Item
+              name="text"
+            >
+              <Input.TextArea allowClear={true} placeholder="Текст комментария" />
+            </Form.Item>
+            <Form.Item>
+              <Button block htmlType="submit">Отправить комментарий</Button>
+            </Form.Item>
+          </Form>
         </Col>
       </Row>
       <Button variant="outlined" size="large" onClick={() => { navigate(-1) }}>
