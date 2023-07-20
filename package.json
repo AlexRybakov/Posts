@@ -21,12 +21,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy-gh": "cross-env REACT_APP_GH_PAGES=true npm run build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +46,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "cross-env": "^7.0.3"
   }
 }
