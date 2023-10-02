@@ -5,7 +5,7 @@ import api from "../../utils/api";
 import { LayoutApp } from "../Layout/Layout";
 import { AppHeader } from "../header/header";
 import { AppFooter } from "../footer/footer";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { NotFoundPage } from "../../pages/not-found-page";
 import PostPage from "../../pages/post-page";
 import { isLiked } from "../../utils/post";
@@ -93,7 +93,7 @@ export function App() {
             </Space>
             ]}
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to={'/Posts'} />} />
         </Routes>
         <AppFooter />
       </UserContext.Provider>
